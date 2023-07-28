@@ -18,7 +18,6 @@
       }
 
       // Perform further actions, e.g., sending data to the server, etc.
-      alert(`Sign up successful!\nUsername: ${username}\nEmail: ${email}`);
       
       // Fetch API POST request to the server
       fetch('/signup', {
@@ -27,10 +26,12 @@
           'content-type': 'application/json'
         },
         body: JSON.stringify({ username,email, confirmPassword })
-      }).then(function() {
+      }).then(function(res) {
+        if(res.status==401){alert("email already exist");return;}
         console.log(";klkjiokj");
         window.location.href = '/login';      });
     }
+    alert(`Sign up successful!\nUsername: ${username}\nEmail: ${email}`);
 
     // Add event listener to the "Sign Up" button
     signupButton.addEventListener('click', handleFormSubmission);

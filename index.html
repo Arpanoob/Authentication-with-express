@@ -80,8 +80,28 @@
     </section>
   </main>
 
+<h1>                </h1><button id="logout">Log out</button>
   <footer>
     <p>&copy; 2023 Your Name. All rights reserved.</p>
   </footer>
 </body>
+<script>
+const logoutButton = document.getElementById('logout'); 
+logoutButton.addEventListener('click', function() {
+  // Send a request to the server to log out the user
+  fetch('/logout')
+    .then(response => {
+      if (response.ok) {
+        // If logout is successful, redirect to the home page or any other page
+        window.location.href = '/';
+      } else {
+        // Handle logout failure, if any
+        console.error('Logout failed.');
+      }
+    })
+    .catch(error => {
+      console.error('Error during logout:', error);
+    });
+});
+</script>
 </html>

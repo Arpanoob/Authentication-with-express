@@ -122,6 +122,16 @@ fs.readFile('users.json',function(err,data){
     }
   }
   try {
+let flag=false;
+    dataArray.forEach(function(user) {
+      if(user.email===req.body.email)
+      {
+         flag=true;
+      }
+    });
+    if(flag)
+   { res.status(401).end('email present');
+  return;}
     dataArray.push(req.body);
     fs.writeFile('users.json', JSON.stringify(dataArray), function (writeErr) {
       if (writeErr) {
@@ -234,3 +244,13 @@ app.get('/todo.txt',function(req,res){
 app.get('/signup.js',function(req,res){
   res.sendFile(__dirname+"/signup.js")
 })
+
+app.get('/logout', function(req, res) {
+  req.session.destroy(function(err) {
+    if (err) {
+      console.error('Error destroying session:', err);
+    }
+    // Redirect the user to the home page or any other page after logout
+    res.redirect('/login');
+  });
+});

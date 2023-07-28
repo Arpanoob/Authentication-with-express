@@ -92,7 +92,7 @@
           // Successful login
           alert('Login successful!'+response.ok+"  "+response.status);
           // Redirect the user to the dashboard or another page upon successful login
-          window.location.href = '/about';
+          window.location.href = '/';
         } else if (response.status === 401) {
           // Incorrect credentials
           alert('Invalid username or password. Please try again.');
